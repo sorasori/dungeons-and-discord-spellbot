@@ -12,14 +12,13 @@ class DiscordRunner():
         logger: Logger, to manage a clean output 
     """
     token: str
-    client: Client
+    client: Client = Client()
     logger: Logger
 
     def __init__(self, token: str,
                  logger: Logger) -> None:
         self.token = token
         self.logger = logger
-        self.client = Client()
 
     def boot(self):
         """
@@ -32,9 +31,7 @@ class DiscordRunner():
 
     @client.event
     async def on_message(self, message: Message) -> int:
-        """
-            Reacts to a message and delegates to the correct coroutine
-        """
+        """ Reacts to a message and delegates to the correct coroutine """
         try:
             # Bot is not going to react to itself
             if message.author() == self.client.user():

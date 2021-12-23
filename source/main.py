@@ -1,13 +1,35 @@
 import discordrunner
 from yaml import load, YAMLError
 import logging
+import argparse
 
-# TODO: Add argparse to parse token from CLI
+# TODO: threading?...
 
 def main() -> None:
-    # TODO: change credentials path to variable path, add default
-    credentials_path = "discord.credentials"
-    logger = logging.Logger()
+    # Parse CLI arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--credentials", default="discord.credentials", help="Path to credentials file")
+    parser.add_argument("--debug", action="store_true", help="If true will log detailed messages on terminal")
+    args = parser.parse_args()
+    
+    # Init path to credentials
+    credentials_path = args.credentials
+
+    # Init logger
+    logger = logging.getLogger(__name__)
+    if args.debug:
+        logger.setLevel(logging.DEBUG)
+    else:
+        logger.setLevel(logging.INFO)
+    console_log_handler = logging.StreamHandler()
+    console_log_handler.setLevel(logging.DEBUG)
+    console_log_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s ')
+    console_log_handler.setFormatter(console_log_formatter)
+    logger.addHandler(console_log_handler)
+
+    logger.info("A")
+    print("b")
+
     try:
         # Read out credentials file
         with open(credentials_path, "r") as f:
