@@ -4,6 +4,7 @@ import init_gen
 client = discord.Client()
 order_of_play = [] # we need this later
 generator = init_gen.start_game(order_of_play)
+discord_token = ""
 
 @client.event
 async def on_ready():
@@ -67,4 +68,4 @@ async def on_message(message):
         await message.channel.send("Oops, Error") # chat will receive this message
         return None
 
-client.run("Njk4MTY0NDIwNTEzMzY2MDU2.XpB2cw.AU1OGyYZusZa-4ZqKY6gui9rpDc")
+client.run(discord_token)
