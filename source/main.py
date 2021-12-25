@@ -27,9 +27,6 @@ def main() -> None:
     console_log_handler.setFormatter(console_log_formatter)
     logger.addHandler(console_log_handler)
 
-    logger.info("A")
-    print("b")
-
     try:
         # Read out credentials file
         with open(credentials_path, "r") as f:
